@@ -9,30 +9,7 @@
 
 #ifdef USE_BASE
    
-#ifdef POLOLU_VNH5019
-  /* Include the Pololu library */
-  #include "DualVNH5019MotorShield.h"
-
-  /* Create the motor driver object */
-  DualVNH5019MotorShield drive;
-  
-  /* Wrap the motor driver initialization */
-  void initMotorController() {
-    drive.init();
-  }
-
-  /* Wrap the drive motor set speed function */
-  void setMotorSpeed(int i, int spd) {
-    if (i == LEFT) drive.setM1Speed(spd);
-    else drive.setM2Speed(spd);
-  }
-
-  // A convenience function for setting both motor speeds
-  void setMotorSpeeds(int leftSpeed, int rightSpeed) {
-    setMotorSpeed(LEFT, leftSpeed);
-    setMotorSpeed(RIGHT, rightSpeed);
-  }
-#elif defined POLOLU_MC33926
+#ifdef defined POLOLU_MC33926
   /* Include the Pololu library */
   #include "DualMC33926MotorShield.h"
 
@@ -57,14 +34,15 @@
   }
 #elif defined L298_MOTOR_DRIVER
   void initMotorController() {
+    pinMode(RIGHT_NSLEEP,OUTPUT);
+    pinMode(LEFT_NSLEEP,OUTPUT);
     digitalWrite(RIGHT_NSLEEP, HIGH);
     digitalWrite(LEFT_NSLEEP, HIGH);  
-    analogWrite(LEFT_VREF, 10);
-    analogWrite(RIGHT_VREF, 10);
-    digitalWrite(RIGHT_MOTOR_DIR, HIGH);
-    digitalWrite(LEFT_MOTOR_DIR, HIGH);    
-    digitalWrite(RIGHT_MOTOR_ENABLE, HIGH);
-    digitalWrite(LEFT_MOTOR_ENABLE, HIGH);
+    
+    pinMode(RIGHT_MOTOR_DIR,OUTPUT);
+    pinMode(LEFT_MOTOR_DIR,OUTPUT);
+    pinMode(RIGHT_MOTOR_ENABLE,OUTPUT);
+    pinMode(LEFT_MOTOR_ENABLE,OUTPUT);
     
   }
   
@@ -80,12 +58,12 @@
       spd = 255;
     
     if (i == LEFT) { 
-      if      (reverse == 0) { analogWrite(LEFT_MOTOR_DIR, spd);}
-      else if (reverse == 1) { analogWrite(LEFT_MOTOR_DIR, 0); }
+      if      (reverse == 0) { digitalWrite(LEFT_MOTOR_DIR, 1); analogWrite(LEFT_MOTOR_ENABLE, spd);}
+      else if (reverse == 1) { digitalWrite(LEFT_MOTOR_DIR, 0); analogWrite(LEFT_MOTOR_ENABLE, spd);}
     }
     else /*if (i == RIGHT) //no need for condition*/ {
-      if      (reverse == 0) { analogWrite(RIGHT_MOTOR_DIR, spd);}
-      else if (reverse == 1) { analogWrite(RIGHT_MOTOR_DIR, 0);}
+      if      (reverse == 0) { digitalWrite(RIGHT_MOTOR_DIR, 1); analogWrite(RIGHT_MOTOR_ENABLE, spd);}
+      else if (reverse == 1) { digitalWrite(RIGHT_MOTOR_DIR, 0); analogWrite(RIGHT_MOTOR_ENABLE, spd);}
     }
   }
   
