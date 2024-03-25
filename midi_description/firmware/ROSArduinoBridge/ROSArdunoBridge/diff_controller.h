@@ -4,6 +4,10 @@
    
    http://vanadium-ros-pkg.googlecode.com/svn/trunk/arbotix/
 */
+#include "encoder_driver.h"
+#include "commands.h"
+#include "motor_driver.h"
+#define MAX_PWM 255
 
 /* PID setpoint info For a Motor */
 typedef struct {
