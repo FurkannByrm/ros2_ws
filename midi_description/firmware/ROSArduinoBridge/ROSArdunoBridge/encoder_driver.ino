@@ -1,4 +1,4 @@
-#ifdef USE_BASE 
+ #ifdef USE_BASE 
 #ifdef ARDUINO_ENC_COUNTER
   volatile long left_enc_pos = 0L;
   volatile long right_enc_pos = 0L;
