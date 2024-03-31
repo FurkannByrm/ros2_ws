@@ -11,6 +11,7 @@
     "files.associations": {
         "*.cpp": "cpp",
         "chrono": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "*.ipp": "cpp"
     }
 }
