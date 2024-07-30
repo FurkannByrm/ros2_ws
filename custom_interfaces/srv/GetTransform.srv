@@ -3,5 +3,5 @@ string frame_id
 string child_id
 ---
 #response
-geometry_msgs/TransformStramped transform
+geometry_msgs/TransformStamped transform
 bool success

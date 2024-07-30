@@ -11,6 +11,7 @@
                 "/home/furkan/control_ws/src/odometry/include/**",
                 "/home/furkan/control_ws/src/robot_control/include/**",
                 "/home/furkan/control_ws/src/robot_description/include/**",
+                "/home/furkan/ros2_control_ws/install/custom_interfaces/include/**",
                 "/usr/include/**"
             ],
             "name": "ROS",
