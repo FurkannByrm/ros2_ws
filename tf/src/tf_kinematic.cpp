@@ -25,7 +25,7 @@ Node{name}, last_x_{0.0}, x_increment_{0.05}, rotations_counter_{0}
     static_transform_stamped_.transform.rotation.z = 1;
 
     static_tf_broadcaster_->sendTransform(static_transform_stamped_);
-    RCLCPP_INFO_STREAM(get_logger()," publishing static transform between"<< static_transform_stamped_.header.frame_id<<" and "<<static_transform_stamped_.child_frame_id);
+    RCLCPP_INFO_STREAM(get_logger()," publishing static transform between "<< static_transform_stamped_.header.frame_id<<" and "<<static_transform_stamped_.child_frame_id);
 
     //timer
 
@@ -80,7 +80,7 @@ bool TfKinematics::getTransformCallBack(const std::shared_ptr<custom_interfaces:
                                         const std::shared_ptr<custom_interfaces::srv::GetTransform::Response> res)
 {
 
-  RCLCPP_INFO_STREAM(get_logger(), "Requested Transform between " << req->frame_id << " and " << req->child_id);
+  RCLCPP_INFO_STREAM(this->get_logger(), "Requested Transform between " << req->frame_id << " and " << req->child_id);
   
   geometry_msgs::msg::TransformStamped requested_transform;
   
@@ -90,7 +90,7 @@ bool TfKinematics::getTransformCallBack(const std::shared_ptr<custom_interfaces:
                                                       tf2::TimePointZero);
   }
   catch(tf2::TransformException &ex){
-  RCLCPP_ERROR_STREAM(get_logger(), "An error occurred while transforming " 
+  RCLCPP_ERROR_STREAM(this->get_logger(), "An error occurred while transforming " 
                      << req->frame_id << " and " << req->child_id
                      << ": " << ex.what());
   }

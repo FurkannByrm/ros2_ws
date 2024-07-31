@@ -7,20 +7,60 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+find_package(rclcpp REQUIRED)
 
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # comment the line when a copyright and license is added to all source files
-  set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # comment the line when this package is in a git repo and when
-  # a copyright and license is added to all source files
-  set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
-endif()
+
+include_directories(${PROJECT_SOURCE_DIR}/include)
+add_executable(io src/_IO.cpp)
+add_executable(const src/const.cpp)
+add_executable(do src/do_while.cpp)
+add_executable(error_catch src/error_catch.cpp)
+add_executable(string_ src/_string.cpp)
+add_executable(struct_function src/struct_function.cpp)
+add_executable(vector src/vector.cpp)
+add_executable(template src/template.cpp)
+
+ament_target_dependencies(io
+rclcpp
+)
+ament_target_dependencies(template
+rclcpp
+)
+ament_target_dependencies(string_
+rclcpp
+)
+
+ament_target_dependencies(do
+rclcpp
+)
+
+ament_target_dependencies(const
+rclcpp
+)
+ament_target_dependencies(error_catch
+rclcpp
+)
+ament_target_dependencies(struct_function
+rclcpp
+)
+ament_target_dependencies(vector
+rclcpp
+)
+install(TARGETS
+  string_
+  error_catch
+  io
+  const
+  do
+  struct_function
+  vector
+  template
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(
+  DIRECTORY 
+  DESTINATION share/${PROJECT_NAME}
+)
 
 ament_package()
