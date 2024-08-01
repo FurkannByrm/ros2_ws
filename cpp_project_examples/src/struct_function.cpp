@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 
+
 typedef struct{
     int age;
     std::string name;

@@ -18,14 +18,17 @@ add_executable(error_catch src/error_catch.cpp)
 add_executable(string_ src/_string.cpp)
 add_executable(struct_function src/struct_function.cpp)
 add_executable(vector src/vector.cpp)
-add_executable(template src/template.cpp)
-
+# add_executable(template src/template.cpp)
+add_executable(copy src/copy_constructor.cpp)
+ament_target_dependencies(copy
+rclcpp
+)
 ament_target_dependencies(io
 rclcpp
 )
-ament_target_dependencies(template
-rclcpp
-)
+# ament_target_dependencies(template
+# rclcpp
+# )
 ament_target_dependencies(string_
 rclcpp
 )
@@ -46,7 +49,9 @@ rclcpp
 ament_target_dependencies(vector
 rclcpp
 )
+
 install(TARGETS
+  copy
   string_
   error_catch
   io
@@ -54,7 +59,8 @@ install(TARGETS
   do
   struct_function
   vector
-  template
+  # template
+  copy
   DESTINATION lib/${PROJECT_NAME}
 )
 
