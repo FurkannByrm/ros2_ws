@@ -6,7 +6,7 @@ using namespace std::chrono_literals;
 using namespace std::placeholders;
 
 TfKinematics::TfKinematics(const std::string& name) : 
-Node{name}, last_x_{0.0}, x_increment_{0.05}, rotations_counter_{0}
+Node{name}, last_x_{0.8}, x_increment_{0.0}, rotations_counter_{0}
 {
     static_tf_broadcaster_ = std::make_shared<tf2_ros::StaticTransformBroadcaster>(this);
     dynamic_tf_broadcaster_= std::make_unique<tf2_ros::TransformBroadcaster>(*this);

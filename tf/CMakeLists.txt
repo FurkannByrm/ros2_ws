@@ -40,5 +40,15 @@ ament_target_dependencies(tf_kinematics
   tf_kinematics
   DESTINATION lib/${PROJECT_NAME}
 )
-
+add_executable(static_tf2_broadcaster src/static_broadcaster.cpp)
+ament_target_dependencies(
+   static_tf2_broadcaster
+   geometry_msgs
+   rclcpp
+   tf2
+   tf2_ros
+)
+install(TARGETS
+   static_tf2_broadcaster
+   DESTINATION lib/${PROJECT_NAME})
 ament_package()
