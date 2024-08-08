@@ -16,6 +16,7 @@ add_library(
   midi_bot
   SHARED
   src/diffbot_system.cpp
+  src/control_board_comms.cpp
 )
 
 # find dependencies
