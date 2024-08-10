@@ -85,7 +85,9 @@
         "csignal": "cpp",
         "future": "cpp",
         "variant": "cpp",
-        "cfenv": "cpp"
+        "cfenv": "cpp",
+        "any": "cpp",
+        "strstream": "cpp"
     },
     "C_Cpp.default.compilerPath": "/usr/bin/g++",
     "C_Cpp.errorSquiggles": "enabled"

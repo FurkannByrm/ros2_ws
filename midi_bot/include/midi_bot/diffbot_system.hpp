@@ -15,6 +15,11 @@
 #include "control_board_comms.hpp"
 #include "visibility_control.hpp"
 
+#include <limits>
+#include <memory>
+#include <vector>
+
+
 namespace midi_bot
 {
     class MidiHardware : public hardware_interface::SystemInterface{
@@ -68,17 +73,11 @@ namespace midi_bot
         
         private:
 
-        ControllerBoards comms_;
+        ControlBoardComms comms_;
         Config cfg_;
         Wheel wheel_1_;
         Wheel Wheel_2_;
     };
 } //namespace midi_bot
-
-
-
-
-
-
 
 #endif //_DIFF_BOT_HPP_

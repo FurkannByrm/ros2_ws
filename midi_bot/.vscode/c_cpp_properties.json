@@ -7,15 +7,14 @@
       },
       "includePath": [
         "/home/furkan/ros2_ws/install/tf/include/**",
-        "/home/furkan/ros2_ws/install/serial/include/**",
         "/home/furkan/ros2_ws/install/custom_interfaces/include/**",
         "/opt/ros/humble/include/**",
         "/home/furkan/ros2_ws/src/cpp_project_examples/include/**",
         "/home/furkan/ros2_ws/src/gazebo_ignition/include/**",
-        "/home/furkan/ros2_ws/src/midi_bot/include/**",
         "/home/furkan/ros2_ws/src/tf/include/**",
         "/home/furkan/ros2_ws/src/midi_bot/include/**",
-
+        "/home/furkan/ros2_ws/install/midi_bot/include/**",
+        
         "/usr/include/**"
       ],
       "name": "ROS",

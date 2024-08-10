@@ -26,7 +26,7 @@ class ControlBoardComms : public rclcpp::Node
 
     private:
     LibSerial::SerialPort serial_conn_;
-    double timeout_ms;
+    double timeout_ms_;
 };
 
 
