@@ -14,6 +14,7 @@
         "/home/furkan/ros2_ws/src/tf/include/**",
         "/home/furkan/ros2_ws/src/midi_bot/include/**",
         "/home/furkan/ros2_ws/install/midi_bot/include/**",
+        "/home/furkan/ros2_control_ws/src/midi_bot/include/**",
         
         "/usr/include/**"
       ],

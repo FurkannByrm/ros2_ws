@@ -19,10 +19,9 @@
 #include <memory>
 #include <vector>
 
-
 namespace midi_bot
 {
-    class MidiHardware : public hardware_interface::SystemInterface{
+    class MidiHardware : public hardware_interface::SystemInterface, rclcpp::Node{
 
         struct Config{
             std::string left_wheel_name = "";
@@ -74,8 +73,8 @@ namespace midi_bot
 
         ControlBoardComms comms_;
         Config cfg_;
-        Wheel wheel_1_;
-        Wheel Wheel_2_;
+        Wheel wheel_l_;
+        Wheel Wheel_r_;
     };
 } //namespace midi_bot
 
