@@ -12,6 +12,7 @@ find_package(rclcpp REQUIRED)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 add_executable(io src/_IO.cpp)
+add_executable(ref src/reference.cpp)
 add_executable(const src/const.cpp)
 add_executable(do src/do_while.cpp)
 add_executable(error_catch src/error_catch.cpp)
@@ -23,7 +24,12 @@ add_executable(copy src/copy_constructor.cpp)
 ament_target_dependencies(copy
 rclcpp
 )
+
 ament_target_dependencies(io
+rclcpp
+)
+
+ament_target_dependencies(ref
 rclcpp
 )
 # ament_target_dependencies(template
@@ -51,6 +57,7 @@ rclcpp
 )
 
 install(TARGETS
+  ref
   copy
   string_
   error_catch
