@@ -29,7 +29,7 @@ target_include_directories(midi_bot PUBLIC
 $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR} include>
 $<INSTALL_INTERFACE:include/midi_bot>
 )
-
+include_directories(include)
 ament_target_dependencies(
   midi_bot PUBLIC 
   ${THIS_PACKAGE_INCLUDE_DEPENDS}
