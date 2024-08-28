@@ -1,4 +1,4 @@
-#include "diffbot_system.hpp"
+#include "midi_bot/diffbot_system.hpp"
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 
 namespace midi_bot

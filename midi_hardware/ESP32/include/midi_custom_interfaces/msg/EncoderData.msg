@@ -1,2 +1,0 @@
-uint64 left_encoder
-uint64 right_encoder

@@ -1,2 +1,0 @@
-uint8 left_pwm
-uint8 right_pwm

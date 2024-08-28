@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
+
+    <xacro:include filename="/home/furkan/ros2_ws/src/midi_bot/description/urdf/robot_core.xacro" />
+     <!-- Import Rviz colors -->
+    <xacro:include filename="/home/furkan/ros2_ws/src/midi_bot/description/urdf/midibot.materials.xacro" />
+
+  <xacro:include filename="/home/furkan/ros2_ws/src/midi_bot/description/ros2_control/diffbot.ros2_control.xacro" />
+  
+    
+</robot>
