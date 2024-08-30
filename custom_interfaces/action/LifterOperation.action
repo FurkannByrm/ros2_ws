@@ -1,0 +1,17 @@
+# LifterOperation.action
+
+# Goal
+float64 target_position
+float64 profile_time
+
+---
+
+# Result
+bool target_reached
+string status_str
+
+---
+
+# Feedback
+float64 current_position
+float64 target_command
