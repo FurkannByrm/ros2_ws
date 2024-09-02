@@ -16,7 +16,6 @@
                 "/home/furkan/ros2_ws/src/hardware_status/include/**",
                 "/home/furkan/ros2_control_ws/src/tf/include/**", 
                 "/home/furkan/ros2_ws/install/custom_interfaces/include/custom_interfaces/**",
-                "/home/furkan/ros2_ws/src/hardware_status/include/**",
                 "/usr/include/**",
                 "${workspaceFolder}/tf/include"
             ],

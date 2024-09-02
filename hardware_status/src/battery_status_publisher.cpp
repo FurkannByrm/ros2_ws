@@ -1,7 +1,7 @@
 #include "hardware_status/battery_status_publisher.hpp"
 
 
-BatteryStatus::BatteryStatus(): Node{"Bms_status_publisher_node"}
+BatteryStatus::BatteryStatus(): Node{"bms_status_publisher_node"}
 {
     publisher_ = this->create_publisher<custom_interfaces::msg::BmsStatus>("bms_status",10);
     timer_     = this->create_wall_timer(std::chrono::seconds(1),std::bind(&BatteryStatus::BatteryStatusCallBack,this));
