@@ -1,6 +1,9 @@
 #ifndef _SAFETY_STOP_HPP_
 #define _SAFETY_STOP_HPP_
 
+
+#include <chrono>
+#include <thread> 
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "std_msgs/msg/bool.hpp"
@@ -36,7 +39,7 @@ class SafetyStop : public rclcpp::Node{
     rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr safety_stop_pub_;
     rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr zones_pub_;
     rclcpp_action::Client<twist_mux_msgs::action::JoyTurbo>::SharedPtr decrease_speed_client_;
-    rclcpp_action::Client<twist_mux_msgs::action::JoyTurbo>::SharedPtr increate_speed_client_;
+    rclcpp_action::Client<twist_mux_msgs::action::JoyTurbo>::SharedPtr increase_speed_client_;
 
     void laserCalBack(const sensor_msgs::msg::LaserScan &msg);
 
