@@ -15,6 +15,7 @@ SafetyStop::SafetyStop(): Node{"safety_stop_node"}, is_first_msg_{true}, state_{
     std::string safety_stop_topic = get_parameter("safety_stop_topic").as_string();
 
     laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(scan_topic, 10, std::bind(&SafetyStop::laserCalBack, this, _1));
+    safety_stop_pub_ = create_publisher<std_msgs::msg::Bool>(safety_stop_topic, 10);
     zones_pub_ = this->create_publisher<visualization_msgs::msg::MarkerArray>("zones",10);
     decrease_speed_client_ = rclcpp_action::create_client<twist_mux_msgs::action::JoyTurbo>(this,"joy_turbo_decrease");
     increase_speed_client_ = rclcpp_action::create_client<twist_mux_msgs::action::JoyTurbo>(this,"joy_turbo_increase");
