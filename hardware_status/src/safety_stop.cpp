@@ -5,8 +5,8 @@ SafetyStop::SafetyStop(): Node{"safety_stop_node"}, is_first_msg_{true}, state_{
 {
     RCLCPP_INFO(this->get_logger(),"Node initializated");
 
-    declare_parameter<double>("warning_distance",0.6);
-    declare_parameter<double>("danger_distance", 0.2);
+    declare_parameter<double>("warning_distance", 2.0);
+    declare_parameter<double>("danger_distance", 1.0);
     declare_parameter<std::string>("scan_topic","scan");
     declare_parameter<std::string>("safety_stop_topic","safety_stop");
     warning_distance_ = get_parameter("warning_distance").as_double();
@@ -14,7 +14,7 @@ SafetyStop::SafetyStop(): Node{"safety_stop_node"}, is_first_msg_{true}, state_{
     std::string scan_topic = get_parameter("scan_topic").as_string();
     std::string safety_stop_topic = get_parameter("safety_stop_topic").as_string();
 
-    laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(scan_topic, 10, std::bind(&SafetyStop::laserCalBack, this, _1));
+    laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(scan_topic, 10, std::bind(&SafetyStop::laserCallBack, this, _1));
     safety_stop_pub_ = create_publisher<std_msgs::msg::Bool>(safety_stop_topic, 10);
     zones_pub_ = this->create_publisher<visualization_msgs::msg::MarkerArray>("zones",10);
     decrease_speed_client_ = rclcpp_action::create_client<twist_mux_msgs::action::JoyTurbo>(this,"joy_turbo_decrease");
@@ -46,19 +46,23 @@ SafetyStop::SafetyStop(): Node{"safety_stop_node"}, is_first_msg_{true}, state_{
     zones_.markers.push_back(danger_zone);
 }
 
-void SafetyStop::laserCalBack(const sensor_msgs::msg::LaserScan &msg)
+void SafetyStop::laserCallBack(const sensor_msgs::msg::LaserScan &msg)
 {
+
+    
     state_ = State::FREE;
     for(const auto &range : msg.ranges)
     {
         if(range<=warning_distance_)
         {
             state_ = State::WARNING;
+            RCLCPP_INFO(this->get_logger(), "WARNING DISTANCE!!!!!!");
             
             if(range<=danger_distance_)
             {
 
                 state_ = State::DANGER;
+                RCLCPP_INFO(this->get_logger(),"DANGER DISTANCE!!!!!");
                 break;
             }
         
@@ -71,6 +75,7 @@ void SafetyStop::laserCalBack(const sensor_msgs::msg::LaserScan &msg)
         std_msgs::msg::Bool is_safety_stop;
         if(state_ == State::WARNING)
         {
+            RCLCPP_INFO(this->get_logger(), "WARNING DISTANCE!!!!!!");
             is_safety_stop.data = true;
             decrease_speed_client_->async_send_goal(twist_mux_msgs::action::JoyTurbo::Goal());
             zones_.markers.at(0).color.a = 1;
@@ -78,12 +83,14 @@ void SafetyStop::laserCalBack(const sensor_msgs::msg::LaserScan &msg)
         }
         else if(state_==State::DANGER)
         {
+            RCLCPP_INFO(this->get_logger(),"DANGER DISTANCE!!!!!");
             is_safety_stop.data = true;
             zones_.markers.at(0).color.a = 1.0;
             zones_.markers.at(1).color.a = 1.0; 
         }
         else if(state_==State::FREE)
         {   
+            RCLCPP_INFO(this->get_logger(),"FREE DISTANCE!!!!!");
             is_safety_stop.data = false;
             increase_speed_client_->async_send_goal(twist_mux_msgs::action::JoyTurbo::Goal());
             zones_.markers.at(0).color.a = 0.5;

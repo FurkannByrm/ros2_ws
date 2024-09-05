@@ -41,7 +41,7 @@ class SafetyStop : public rclcpp::Node{
     rclcpp_action::Client<twist_mux_msgs::action::JoyTurbo>::SharedPtr decrease_speed_client_;
     rclcpp_action::Client<twist_mux_msgs::action::JoyTurbo>::SharedPtr increase_speed_client_;
 
-    void laserCalBack(const sensor_msgs::msg::LaserScan &msg);
+    void laserCallBack(const sensor_msgs::msg::LaserScan &msg);
 
 
 };
