@@ -15,7 +15,8 @@ using std::placeholders::_1;
 
 
 
-enum class State{
+
+enum class State : int{
 
     FREE = 0,
     WARNING,
@@ -33,6 +34,7 @@ class SafetyStop : public rclcpp::Node{
     double warning_distance_, danger_distance_;
     bool is_first_msg_;
     State state_, prev_state_;
+    
     visualization_msgs::msg::MarkerArray zones_;
 
     rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr laser_sub_;

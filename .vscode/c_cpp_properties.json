@@ -7,14 +7,9 @@
             },
             "includePath": [
                 "/opt/ros/humble/include/**",
-                "/home/furkan/control_ws/src/odometry/include/**",
-                "/home/furkan/control_ws/src/robot_control/include/**",
-                "/home/furkan/control_ws/src/robot_description/include/**",
-                "/home/furkan/ros2_control_ws/src/cpp_project_examples/include/**",
                 "/home/furkan/ros2_ws/src/midi_bot/include/**",
                 "/home/furkan/ros2_control_ws/src/midi_bot/include/midi_bot/**",
                 "/home/furkan/ros2_ws/src/hardware_status/include/**",
-                "/home/furkan/ros2_control_ws/src/tf/include/**", 
                 "/home/furkan/ros2_ws/install/custom_interfaces/include/custom_interfaces/**",
                 "/usr/include/**",
                 "${workspaceFolder}/tf/include"
