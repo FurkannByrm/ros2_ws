@@ -9,6 +9,8 @@
                 "/opt/ros/humble/include/**",
                 "/home/furkan/ros2_ws/src/midi_bot/include/**",
                 "/home/furkan/ros2_control_ws/src/midi_bot/include/midi_bot/**",
+                "/home/furkan/ros2_ws/src/lifecycle_demo/include/**",
+                "/home/furkan/ros2_ws/install/lifecycle_demo/include/lifecycle_demo/**",
                 "/home/furkan/ros2_ws/src/hardware_status/include/**",
                 "/home/furkan/ros2_ws/install/custom_interfaces/include/custom_interfaces/**",
                 "/usr/include/**",
