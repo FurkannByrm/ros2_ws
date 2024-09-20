@@ -12,6 +12,7 @@
 #include "twist_mux_msgs/action/joy_turbo.hpp"
 
 using std::placeholders::_1;
+using namespace std::chrono_literals;
 
 
 
@@ -42,7 +43,10 @@ class SafetyStop : public rclcpp::Node{
     rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr zones_pub_;
     rclcpp_action::Client<twist_mux_msgs::action::JoyTurbo>::SharedPtr decrease_speed_client_;
     rclcpp_action::Client<twist_mux_msgs::action::JoyTurbo>::SharedPtr increase_speed_client_;
+    rclcpp::CallbackGroup::SharedPtr timer_cb_group_;
+    rclcpp::TimerBase::SharedPtr timer_ptr_;
 
+    void timerCallBack();
     void laserCallBack(const sensor_msgs::msg::LaserScan &msg);
 
 

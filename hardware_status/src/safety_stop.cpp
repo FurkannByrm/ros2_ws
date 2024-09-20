@@ -5,32 +5,34 @@ SafetyStop::SafetyStop(): Node{"safety_stop_node"}, is_first_msg_{true}, state_{
 {
     RCLCPP_INFO(this->get_logger(),"Node initializated");
 
-    declare_parameter<double>("warning_distance", 2.0);
-    declare_parameter<double>("danger_distance", 1.0);
-    declare_parameter<std::string>("scan_topic","scan");
-    declare_parameter<std::string>("safety_stop_topic","safety_stop");
+    declare_parameter<double>("warning_distance", 1.0);
+    declare_parameter<double>("danger_distance", 0.4);
+    declare_parameter<std::string>("scan_topic","/a200_0000/sensors/lidar2d_0/scan");
+    declare_parameter<std::string>("safety_stop_topic","/a200_0000/platform/emergency_stop");
     warning_distance_ = get_parameter("warning_distance").as_double();
     danger_distance_ = get_parameter("danger_distance").as_double();
     std::string scan_topic = get_parameter("scan_topic").as_string();
     std::string safety_stop_topic = get_parameter("safety_stop_topic").as_string();
+    // timer_cb_group_ = nullptr;
 
+    // timer_ptr_= this->create_wall_timer(1s, std::bind(&SafetyStop::timerCallBack, this, timer_cb_group_));
     laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(scan_topic, 10, std::bind(&SafetyStop::laserCallBack, this, _1));
     safety_stop_pub_ = create_publisher<std_msgs::msg::Bool>(safety_stop_topic, 10);
     zones_pub_ = this->create_publisher<visualization_msgs::msg::MarkerArray>("zones",10);
     decrease_speed_client_ = rclcpp_action::create_client<twist_mux_msgs::action::JoyTurbo>(this,"/a200_0000/joy_turbo_decrease");
     increase_speed_client_ = rclcpp_action::create_client<twist_mux_msgs::action::JoyTurbo>(this,"/a200_0000/joy_turbo_increase");
 
-    while(!decrease_speed_client_->wait_for_action_server(std::chrono::seconds(1)) && rclcpp::ok())
-    {
-    RCLCPP_WARN(get_logger(), "Action /joy_turbo_decrease not available! Waiting..");
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    }
+    // while(!decrease_speed_client_->wait_for_action_server(std::chrono::seconds(1)) && rclcpp::ok())
+    // {
+    // RCLCPP_WARN(get_logger(), "Action /joy_turbo_decrease not available! Waiting..");
+    // std::this_thread::sleep_for(std::chrono::seconds(2));
+    // }
 
-    while(!increase_speed_client_->wait_for_action_server(std::chrono::seconds(1)) && rclcpp::ok())
-    {
-    RCLCPP_WARN(get_logger(), "Action /joy_turbo_increase not available! Waiting..");
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    }
+    // while(!increase_speed_client_->wait_for_action_server(std::chrono::seconds(1)) && rclcpp::ok())
+    // {
+    // RCLCPP_WARN(get_logger(), "Action /joy_turbo_increase not available! Waiting..");
+    // std::this_thread::sleep_for(std::chrono::seconds(2));
+    // }
 
 
     visualization_msgs::msg::Marker warning_zone;
@@ -58,6 +60,16 @@ SafetyStop::SafetyStop(): Node{"safety_stop_node"}, is_first_msg_{true}, state_{
     zones_.markers.push_back(danger_zone);
 }
 
+// void SafetyStop::timerCallBack()
+// {   
+//     RCLCPP_INFO(this->get_logger(), "EMERGENCY STOP IS ACTIVATED FOR OBSTACLE");
+//     safety_stop_pub_->publish(is_safety_stop);
+//     auto result_future = safety_stop_pub_->publish(is_safety_stop);
+//     std::future_status status = result_future.wait_for(10s);
+    
+
+// }
+
 void SafetyStop::laserCallBack(const sensor_msgs::msg::LaserScan &msg)
 {
 
@@ -82,13 +94,15 @@ void SafetyStop::laserCallBack(const sensor_msgs::msg::LaserScan &msg)
 
     }
 
-    if(state_ != prev_state_)
+    for(const auto &range : msg.ranges)
+    {
+       if(state_ != prev_state_)
     {
         std_msgs::msg::Bool is_safety_stop;
         if(state_ == State::WARNING)
         {
             RCLCPP_INFO(this->get_logger(), "WARNING DISTANCE!!!!!!");
-            is_safety_stop.data = true;
+            is_safety_stop.data = false;
             decrease_speed_client_->async_send_goal(twist_mux_msgs::action::JoyTurbo::Goal());
             zones_.markers.at(0).color.a = 1;
             zones_.markers.at(1).color.a = 0.5;
@@ -108,9 +122,13 @@ void SafetyStop::laserCallBack(const sensor_msgs::msg::LaserScan &msg)
             zones_.markers.at(0).color.a = 0.5;
             zones_.markers.at(1).color.a = 0.5;
         }
+        
+        safety_stop_pub_->publish(is_safety_stop);        
 
-        prev_state_ = state_;
-        safety_stop_pub_->publish(is_safety_stop);
+    }
+ 
+
+        
     }
 
     if(is_first_msg_)
@@ -122,6 +140,8 @@ void SafetyStop::laserCallBack(const sensor_msgs::msg::LaserScan &msg)
         is_first_msg_ = false;
     }
         zones_pub_->publish(zones_);
+
+
 
 }
 
