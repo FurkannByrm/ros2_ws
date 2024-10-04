@@ -12,8 +12,18 @@ find_package(lifecycle_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 
-add_executable(simple_node src/simple_node.cpp)
-ament_target_dependencies(simple_node rclcpp rclcpp_lifecycle std_msgs)
+add_executable(listener src/listener.cpp)
+ament_target_dependencies(listener
+lifecycle_msgs
+std_msgs
+rclcpp_lifecycle)
+
+add_executable(talker src/lifecycle_talker.cpp)
+ament_target_dependencies(talker
+  lifecycle_msgs
+  rclcpp_lifecycle
+  std_msgs
+)
 
 include_directories(
   include
@@ -21,7 +31,7 @@ include_directories(
 
 
 install(TARGETS
-  simple_node
+  listener
   DESTINATION lib/${PROJECT_NAME}
 )
 
