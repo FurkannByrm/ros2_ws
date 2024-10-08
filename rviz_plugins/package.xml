@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>points_for_loop</name>
+  <version>0.0.0</version>
+  <description>Example points for loop in RViz</description>
+  <maintainer email="your_email@example.com">Your Name</maintainer>
+  <license>Apache 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>visualization_msgs</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+</package>

@@ -13,6 +13,8 @@
                 "/home/furkan/ros2_ws/install/lifecycle_demo/include/lifecycle_demo/**",
                 "/home/furkan/ros2_ws/src/hardware_status/include/**",
                 "/home/furkan/ros2_ws/install/custom_interfaces/include/custom_interfaces/**",
+                "/home/furkan/ros2_ws/src/rviz_plugins/include/**",
+
                 "/usr/include/**",
                 "${workspaceFolder}/tf/include"
             ],
