@@ -9,13 +9,13 @@ class PointsForLoop {
 public:
     PointsForLoop(const std::string &node_name);
 
-    void publishMarkers(); 
+    void publishMarkers();
 
 private:
     rclcpp::Node::SharedPtr node_;
     rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr marker_pub_;
-    std::vector<geometry_msgs::msg::Point> sphere_positions_; // Konumları depolamak için bir vektör
-    uint32_t shape_;
+    std::vector<geometry_msgs::msg::Point> sphere_positions_;
+    int shape_;
 };
 
 #endif  // POINTS_FOR_LOOP_HPP
