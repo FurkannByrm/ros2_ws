@@ -91,5 +91,5 @@
     },
     "C_Cpp.default.compilerPath": "/usr/bin/g++",
     "C_Cpp.errorSquiggles": "disabled",
-    "cmake.sourceDirectory": "/home/furkan/ros2_ws/src/custom_interfaces"
+    "cmake.sourceDirectory": "/home/cengo/ros2_ws/src/nodes"
 }
