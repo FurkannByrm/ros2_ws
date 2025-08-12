@@ -7,8 +7,9 @@
             },
             "includePath": [
                 "/opt/ros/humble/include/**",
-                "/home/furkan/ros2_ws/src/nodes/include/**",
-                "/home/furkan/ros2_ws/install/nodes/include/**",
+                "/home/cengo/ros2_ws/install/examples_rclcpp_cbg_executor/include/**",
+                "/home/cengo/ros2_ws/src/moveit2_samples/include/**",
+                "/home/cengo/ros2_ws/install/moveit2_samples/include/**",
                 "/usr/include/**",
                 "${workspaceFolder}/tf/include"
             ],
